@@ -12,7 +12,6 @@ apps=(
   "ProtonVPN:protonvpn-app"
   "Prism Launcher:prismlauncher"
   "Steam:steam"
-  "btop:btop"
   "VeraCrypt:veracrypt"
   "Only Office:flatpak run org.onlyoffice.desktopeditors"
   "WebCord:webcord"
