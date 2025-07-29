@@ -57,16 +57,6 @@ Grant execution permissions to the script:
 chmod +x hyprrun.sh
 ```
 
-#### 3\. Move to Your $PATH (Recommended)
-
-To call `hyprrun` from anywhere, move it to a directory included in your system's `$PATH`. The `/usr/local/bin` directory is a common and safe choice.
-
-```sh
-sudo mv hyprrun.sh /usr/local/bin/hyprrun
-```
-
-Now you can simply use the `hyprrun` command in your terminal.
-
 ## ⌨️ Usage (Keybinding)
 
 The best way to use `HyprRun` is by binding it to a keyboard shortcut. In **Hyprland**, for example, you can add the following to your `~/.config/hyprland/hyprland.conf`:
