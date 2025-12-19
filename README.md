@@ -136,9 +136,3 @@ This is an open-source project, and you are welcome to contribute\! Feel free to
   - **Fork the repository:** Create your own version and modify it as you see fit.
   - **Suggest improvements:** Open an *Issue* to propose new features or report a bug.
   - **Submit Pull Requests:** If you've implemented a fix or a feature, your pull request is welcome.
-
------
-
-## 💡 Unlicense (public domain)
-
-“Only scarce resources are subject to property.” — Stephan Kinsella
