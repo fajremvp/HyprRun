@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 apps=(
   "Firefox:firefox"
@@ -13,13 +13,13 @@ apps=(
   "Prism Launcher:prismlauncher"
   "Steam:steam"
   "VeraCrypt:veracrypt"
-  "Only Office:flatpak run org.onlyoffice.desktopeditors"
+  "OnlyOffice:flatpak run org.onlyoffice.desktopeditors"
   "WebCord:webcord"
   "Virt Machine Manager:virt-manager"
   "draw.io:drawio"
   "ClamTk:clamtk"
   "Tor Browser:tor-browser"
-  "KdenLive:kdenlive"
+  "Kdenlive:kdenlive"
 )
 
 choice=$(printf "%s\n" "${apps[@]}" | cut -d: -f1 | fzf --prompt="  ")

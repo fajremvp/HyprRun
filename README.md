@@ -1,6 +1,6 @@
 # HyprRun
 
-HyprRun is a minimal, terminal-based application launcher built specifically for dynamic tiling window managers like Hyprland.
+HyprRun is a minimal, terminal-based application launcher built specifically for dynamic tiling window managers like Hyprland, Niri, and Sway.
 
 ![HyprRun in action](HyprRun.gif)
 
@@ -34,6 +34,7 @@ You can install `fzf` using your distribution's package manager.
     ```sh
     sudo dnf install fzf
     ```
+  - **NixOS:** (Add `fzf` to your `environment.systemPackages` or `home.packages`).
   - **For other systems,** please refer to the [official fzf installation guide](https://junegunn.github.io/fzf/installation/).
 
 ## 🚀 Installation
@@ -57,13 +58,59 @@ Grant execution permissions to the script:
 chmod +x hyprrun.sh
 ```
 
+### ❄️ Installation on NixOS (Declarative via Home Manager)
+
+Create a module (e.g., `hyprrun.nix`) and add the following block. **Note the use of `''${apps[@]}` to escape the Bash array and prevent Nix from interpolating it!**
+
+```nix
+{ config, pkgs, ... }:
+{
+  home.packages = [ pkgs.fzf ];
+
+  home.file.".local/bin/hyprrun.sh" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+
+      apps=(
+        "Firefox:firefox"
+        "OBS:obs"
+        "My Script:~/.local/bin/my-script.sh"
+        # Add your entries here
+      )
+
+      choice=$(printf "%s\n" "''${apps[@]}" | cut -d: -f1 | fzf --prompt="  ")
+
+      if [ -n "$choice" ]; then
+        cmd=$(printf "%s\n" "''${apps[@]}" | grep "^$choice:" | cut -d: -f2)
+        setsid sh -c "$cmd >/dev/null 2>&1 &"
+      fi
+    '';
+  };
+}
+```
+
 ## ⌨️ Usage (Keybinding)
 
-The best way to use `HyprRun` is by binding it to a keyboard shortcut. In **Hyprland**, for example, you can add the following to your `~/.config/hyprland/hyprland.conf`:
+The best way to use `HyprRun` is by binding it to a keyboard shortcut in your Window Manager.
+
+**For Hyprland:**
+Add the following to your `~/.config/hyprland/hyprland.conf`:
 
 ```ini
-# Replace 'kitty' with your preferred terminal emulator (e.g., Alacritty, foot)
-bind = $mainMod, R, exec, kitty -e hyprrun.sh
+# Replace 'kitty' with your preferred terminal emulator
+bind = $mainMod, R, exec, kitty -e ~/.local/bin/hyprrun.sh
+
+```
+
+**For Niri:**
+Add the following to your `~/.config/niri/config.kdl`:
+
+```kdl
+binds {
+    Mod+R repeat=false { spawn "kitty" "-e" "~/.local/bin/hyprrun.sh"; }
+}
+
 ```
 
 With this setup, pressing `Super + R` will launch HyprRun.
@@ -77,7 +124,7 @@ apps=(
   "Firefox:firefox"
   "VSCodium:codium"
   "My Script:~/.local/bin/my-script.sh"
-  "Only Office:flatpak run org.onlyoffice.desktopeditors"
+  "OnlyOffice:flatpak run org.onlyoffice.desktopeditors"
   # Add your entries here in "AppName:command" format
 )
 ```
