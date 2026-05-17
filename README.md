@@ -2,7 +2,7 @@
 
 HyprRun is a minimal, terminal-based application launcher built specifically for dynamic tiling window managers like Hyprland, Niri, and Sway.
 
-![HyprRun in action](HyprRun.gif)
+![HyprRun in action](HyprRunNiri.gif)
 
 > Unlike other launchers (such as rofi or wofi), **HyprRun** was designed with **dynamic tiling** in mind: it never overlays windows or spawns floating pop-ups. Instead, it opens inside your terminal and closes instantly after launching the selected app — leaving your workspace clean and consistent.
 
